@@ -16,15 +16,15 @@ if not os.path.isdir('linear_analysis'):
 def linear_model(x, m, b):
     return m * x + b
 
-def linearTrend(symbol, df):
+def linearTrend(symbol, df, NUM_DAYS):
 
     # extract the fields
-    dates=df['date']
-    ope=df['open']
-    hig=df['high']
-    low=df['low']
-    clo=df['close']
-    vol=df['volume']
+    dates=df['date'].values.flatten()[-NUM_DAYS:]
+    ope=df['open'].values.flatten()[-NUM_DAYS:]
+    hig=df['high'].values.flatten()[-NUM_DAYS:]
+    low=df['low'].values.flatten()[-NUM_DAYS:]
+    clo=df['close'].values.flatten()[-NUM_DAYS:]
+    vol=df['volume'].values.flatten()[-NUM_DAYS:]
     # define a figure with subplots
     fig, ax = plt.subplots(2,1,figsize=(16,9),sharex=True,gridspec_kw={'height_ratios': [1, 3], 'hspace': 0})
     # set x values
@@ -80,9 +80,9 @@ def linearTrend(symbol, df):
 
     score=round(100*(clo.tolist()[-1]-y_fit.tolist()[-1])/y_fit.tolist()[-1],2)
     if score<0:
-        plt.suptitle(f'Linear Trend Score\nMost recent close value for {symbol} is {score}% below the trend: BUY')
+        plt.suptitle(f'Linear Trend Score: {NUM_DAYS} Days\nMost recent close value for {symbol} is {score}% below the trend: BUY')
     else:
-        plt.suptitle(f'Linear Trend Score\nMost recent close value for {symbol} is {score}% above the trend: SELL')
-    plt.savefig(f'{current_dir}/linear_analysis/{symbol}_linear_trend_analysis.jpg')
+        plt.suptitle(f'Linear Trend Score: {NUM_DAYS} Days\nMost recent close value for {symbol} is {score}% above the trend: SELL')
+    plt.savefig(f'{current_dir}/linear_analysis/{symbol}_linear_trend_analysis_{NUM_DAYS}_days.jpg')
     
     return score

@@ -11,14 +11,14 @@ if not os.path.isdir('daily_candles'):
     os.mkdir('daily_candles')
 
 # define a functiont that generate candles fitures from a prepared data frame
-def candles(symbol, df):
+def candles(symbol, df,NUM_DAYS):
     # extract the fields
-    dates=df['date']
-    ope=df['open']
-    hig=df['high']
-    low=df['low']
-    clo=df['close']
-    vol=df['volume']
+    dates=df['date'].values.flatten()[-NUM_DAYS:]
+    ope=df['open'].values.flatten()[-NUM_DAYS:]
+    hig=df['high'].values.flatten()[-NUM_DAYS:]
+    low=df['low'].values.flatten()[-NUM_DAYS:]
+    clo=df['close'].values.flatten()[-NUM_DAYS:]
+    vol=df['volume'].values.flatten()[-NUM_DAYS:]
     
     # define a figure with subplots
     fig, ax = plt.subplots(2,1,figsize=(16,9),sharex=True,gridspec_kw={'height_ratios': [1, 3], 'hspace': 0})
