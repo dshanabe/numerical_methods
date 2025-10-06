@@ -2,9 +2,9 @@
 A collection of algorithms for applying numerical methods.
 
 Analyze stock data.
--Use yfinance to download data for a list of symbols
--Write data tables to disk
--Generate candle figures
+- Use yfinance to download data for a list of symbols
+- Write data tables to disk
+- Generate candle figures
 
 BUILD:
 
