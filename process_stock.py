@@ -1,5 +1,6 @@
 import fetchStock
 import vizStock
+import evalStock
 from datetime import date, timedelta
 import pandas as pd
 
@@ -11,7 +12,9 @@ def process(symbol_list, first_datetime_str, final_datetime_str):
         df=fetchStock.writeTable(symbol, first_datetime_str, final_datetime_str)
         # Call on candles to generate candles figure
         vizStock.candles(symbol,df)
-        #evalStock.linearTrend(symbol,df)
+        
+        evalStock.linearTrend(symbol,df)
+        
         #evalStock.movingAverage(symbol,df)
         #evalStock.volatilityScore(symbol,df)
         
